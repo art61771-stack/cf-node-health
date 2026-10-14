@@ -50,7 +50,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git add data/state.json data/status.json data/add-current.txt
+          git add data/state.json data/status.json
           if git diff --cached --quiet; then
             echo "No tracked health data changed."
             exit 0

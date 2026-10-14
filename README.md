@@ -25,7 +25,7 @@ A private-repository-oriented GitHub Actions job that checks a fixed 50-node Qua
 | `MAINT_URL` | Protected Pages maintenance endpoint |
 | `MAINT_TOKEN` | Bearer token accepted by that endpoint |
 
-Keep the repository private. GitHub Actions uses only the automatically supplied `GITHUB_TOKEN` for committing `data/state.json`, `data/status.json`, and `data/add-current.txt`; workflow permission is limited to `contents: write`.
+The repository may be public: node UUID, subscription URL, maintenance URL/token remain Actions Secrets. Only anonymous slot failure counters and aggregate status are committed. Full node URIs and generated `ADD.txt` exist only in workflow memory and are sent directly to the protected Pages endpoint. `GITHUB_TOKEN` is limited to `contents: write`.
 
 ## Probe details
 
@@ -47,11 +47,11 @@ cf-node-health
 cf-node-health --force-replace-failed
 ```
 
-Do not paste secrets into shell history. The checked-in `data/add-current.txt` is empty until the first successful run.
+Do not paste secrets into shell history. The repository never commits generated node lists.
 
 ## Files
 
-- `.github/workflows/health.yml` — scheduled/manual workflow and changed-only commit.
+- `.github/workflows/health.yml` — scheduled/manual workflow and anonymous-state-only changed commit.
 - `src/cf_node_health/checker.py` — WSS, VLESS, MemoryBIO TLS, and HTTP 204 probe.
 - `src/cf_node_health/parser.py` — strict QX parser and slot mapping.
 - `src/cf_node_health/manager.py` — parallel checks, failure state, candidate replacement, rendering, POST.

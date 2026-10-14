@@ -23,7 +23,6 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--force-replace-failed", action="store_true")
     parser.add_argument("--state", default="data/state.json")
     parser.add_argument("--status", default="data/status.json")
-    parser.add_argument("--add", default="data/add-current.txt")
     args = parser.parse_args(argv)
     try:
         subscription_url = _secret("SUBSCRIPTION_URL")
@@ -44,8 +43,6 @@ def main(argv: list[str] | None = None) -> int:
             for region, count in sorted(outcome.report["shortages"].items()):
                 print(f"- {region}: {count} slot(s)", file=sys.stderr)
             return 2
-        Path(args.add).parent.mkdir(parents=True, exist_ok=True)
-        Path(args.add).write_text(outcome.add_txt)
         post_maintenance(maintenance_url, maintenance_token, outcome.add_txt, outcome.report)
         print(f"Health run complete: healthy={outcome.report['healthy']} failed={outcome.report['failed']} replaced={outcome.report['replaced']}")
         for row in outcome.report["replacements"]:

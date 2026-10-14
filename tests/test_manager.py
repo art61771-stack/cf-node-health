@@ -19,7 +19,7 @@ def nodes():
 class ManagerTests(unittest.TestCase):
     def test_two_round_replacement_and_shape(self):
         original = nodes()
-        bad_key = original[0].key
+        bad_key = "HK:01"
         state = {"version": 1, "failures": {bad_key: 1}}
 
         def checker(node):
@@ -42,11 +42,12 @@ class ManagerTests(unittest.TestCase):
                           lambda r: "", UUID)
         self.assertTrue(out.complete)
         self.assertEqual(original[0], out.nodes[0])
-        self.assertEqual(1, out.state["failures"][original[0].key])
+        self.assertEqual(1, out.state["failures"]["HK:01"])
+        self.assertNotIn(original[0].endpoint, json.dumps(out.state))
 
     def test_shortage_blocks_update(self):
         original = nodes()
-        state = {"failures": {original[0].key: 1}}
+        state = {"failures": {"HK:01": 1}}
         out = run_manager(original, state, lambda n: CheckResult(n.index != 1), lambda r: "", UUID)
         self.assertFalse(out.complete)
         self.assertEqual("", out.add_txt)

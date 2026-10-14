@@ -73,13 +73,14 @@ def run_manager(nodes: list[Node], state: dict, checker: Callable[[Node], CheckR
     previous = state.get("failures", {})
     results = check_parallel(nodes, checker)
     failures: dict[str, int] = {}
+    slot_key = lambda node: f"{node.region}:{node.index:02d}"
     replace: list[Node] = []
     check_rows: list[dict] = []
     threshold = 1 if force_replace_failed else 2
     for node in nodes:
         result = results[node.key]
-        count = 0 if result.ok else int(previous.get(node.key, 0)) + 1
-        failures[node.key] = count
+        count = 0 if result.ok else int(previous.get(slot_key(node), 0)) + 1
+        failures[slot_key(node)] = count
         if not result.ok and count >= threshold:
             replace.append(node)
         check_rows.append({"region": node.region, "index": node.index, "ok": result.ok, "failure_rounds": count})
@@ -109,13 +110,12 @@ def run_manager(nodes: list[Node], state: dict, checker: Callable[[Node], CheckR
                 replacement_rows.append({"region": region, "index": old.index, "replaced": False})
             else:
                 replacements[old.index] = accepted
-                failures.pop(old.key, None)
-                failures[accepted.key] = 0
+                failures[slot_key(old)] = 0
                 replacement_rows.append({"region": region, "index": old.index, "replaced": True})
 
     final_nodes = [replacements.get(node.index, node) for node in nodes]
     complete = not shortages and _valid_shape(final_nodes)
-    clean_keys = {node.key for node in final_nodes}
+    clean_keys = {slot_key(node) for node in final_nodes}
     clean_failures = {key: failures.get(key, 0) for key in sorted(clean_keys)}
     report = {
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
