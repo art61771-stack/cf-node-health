@@ -19,7 +19,9 @@ def _region_and_index(tag: str) -> tuple[str, int]:
     lower = f" {tag.lower()} "
     region = next((r for r, words in _REGION_WORDS.items() if any(w in lower for w in words)), "")
     numbers = [int(x) for x in re.findall(r"(?<!\d)(\d{1,2})(?!\d)", tag)]
-    index = numbers[-1] if numbers else 0
+    # The leading two-digit number is the global slot (01..50). Region suffixes
+    # such as TW-01 are human-readable local numbers and must not override it.
+    index = numbers[0] if numbers else 0
     if not region and index:
         region = next((r for r, values in RANGES.items() if index in values), "")
     if region and not index:
