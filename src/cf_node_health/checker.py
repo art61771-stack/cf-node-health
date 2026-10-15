@@ -49,7 +49,21 @@ class VlessChecker:
         )
         try:
             ws.settimeout(min(self.io_timeout, _remaining(deadline)))
-            ws.send_binary(_vless_request(self.node_uuid))
+            incoming = ssl.MemoryBIO()
+            outgoing = ssl.MemoryBIO()
+            context = ssl.create_default_context()
+            tls = context.wrap_bio(incoming, outgoing, server_side=False, server_hostname=TARGET_HOST)
+            try:
+                tls.do_handshake()
+            except ssl.SSLWantReadError:
+                pass
+            hello = outgoing.read() if outgoing.pending else b""
+            if not hello:
+                raise RuntimeError("TLS ClientHello unavailable")
+            # Send VLESS header and the first TLS bytes together. This server
+            # emits its VLESS response header with downstream data, so waiting
+            # after a header-only frame would deadlock.
+            ws.send_binary(_vless_request(self.node_uuid) + hello)
             initial = _recv_binary(ws, deadline, self.io_timeout)
             while len(initial) < 2:
                 initial += _recv_binary(ws, deadline, self.io_timeout)
@@ -59,15 +73,12 @@ class VlessChecker:
             while len(initial) < 2 + addon_len:
                 initial += _recv_binary(ws, deadline, self.io_timeout)
             tunneled = initial[2 + addon_len :]
-            self._tls_http_probe(ws, tunneled, deadline)
+            self._tls_http_probe(ws, tunneled, deadline, tls, incoming, outgoing)
         finally:
             ws.close()
 
-    def _tls_http_probe(self, ws: websocket.WebSocket, initial: bytes, deadline: float) -> None:
-        incoming = ssl.MemoryBIO()
-        outgoing = ssl.MemoryBIO()
-        context = ssl.create_default_context()
-        tls = context.wrap_bio(incoming, outgoing, server_side=False, server_hostname=TARGET_HOST)
+    def _tls_http_probe(self, ws: websocket.WebSocket, initial: bytes, deadline: float,
+                        tls: ssl.SSLObject, incoming: ssl.MemoryBIO, outgoing: ssl.MemoryBIO) -> None:
         if initial:
             incoming.write(initial)
         _drive_handshake(tls, incoming, outgoing, ws, deadline, self.io_timeout)
