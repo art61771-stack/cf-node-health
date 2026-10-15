@@ -1,310 +1,310 @@
 {
   "checks": [
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 1,
-      "ok": false,
+      "ok": true,
       "region": "HK"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 2,
-      "ok": false,
+      "ok": true,
       "region": "HK"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 3,
-      "ok": false,
+      "ok": true,
       "region": "HK"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 4,
-      "ok": false,
+      "ok": true,
       "region": "HK"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 5,
-      "ok": false,
+      "ok": true,
       "region": "HK"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 6,
-      "ok": false,
+      "ok": true,
       "region": "HK"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 7,
-      "ok": false,
+      "ok": true,
       "region": "HK"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 8,
-      "ok": false,
+      "ok": true,
       "region": "HK"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 9,
-      "ok": false,
+      "ok": true,
       "region": "HK"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 10,
-      "ok": false,
+      "ok": true,
       "region": "HK"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 11,
-      "ok": false,
+      "ok": true,
       "region": "TW"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 12,
-      "ok": false,
+      "ok": true,
       "region": "TW"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 13,
-      "ok": false,
+      "ok": true,
       "region": "TW"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 14,
-      "ok": false,
+      "ok": true,
       "region": "TW"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 15,
-      "ok": false,
+      "ok": true,
       "region": "TW"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 16,
-      "ok": false,
+      "ok": true,
       "region": "TW"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 17,
-      "ok": false,
+      "ok": true,
       "region": "TW"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 18,
-      "ok": false,
+      "ok": true,
       "region": "TW"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 19,
-      "ok": false,
+      "ok": true,
       "region": "TW"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 20,
-      "ok": false,
+      "ok": true,
       "region": "TW"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 21,
-      "ok": false,
+      "ok": true,
       "region": "SG"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 22,
-      "ok": false,
+      "ok": true,
       "region": "SG"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 23,
-      "ok": false,
+      "ok": true,
       "region": "SG"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 24,
-      "ok": false,
+      "ok": true,
       "region": "SG"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 25,
-      "ok": false,
+      "ok": true,
       "region": "SG"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 26,
-      "ok": false,
+      "ok": true,
       "region": "SG"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 27,
-      "ok": false,
+      "ok": true,
       "region": "SG"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 28,
-      "ok": false,
+      "ok": true,
       "region": "SG"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 29,
-      "ok": false,
+      "ok": true,
       "region": "SG"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 30,
-      "ok": false,
+      "ok": true,
       "region": "SG"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 31,
-      "ok": false,
+      "ok": true,
       "region": "US"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 32,
-      "ok": false,
+      "ok": true,
       "region": "US"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 33,
-      "ok": false,
+      "ok": true,
       "region": "US"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 34,
-      "ok": false,
+      "ok": true,
       "region": "US"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 35,
-      "ok": false,
+      "ok": true,
       "region": "US"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 36,
-      "ok": false,
+      "ok": true,
       "region": "US"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 37,
-      "ok": false,
+      "ok": true,
       "region": "US"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 38,
-      "ok": false,
+      "ok": true,
       "region": "US"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 39,
-      "ok": false,
+      "ok": true,
       "region": "US"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 40,
-      "ok": false,
+      "ok": true,
       "region": "US"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 41,
-      "ok": false,
+      "ok": true,
       "region": "DE"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 42,
-      "ok": false,
+      "ok": true,
       "region": "DE"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 43,
-      "ok": false,
+      "ok": true,
       "region": "DE"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 44,
-      "ok": false,
+      "ok": true,
       "region": "DE"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 45,
-      "ok": false,
+      "ok": true,
       "region": "DE"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 46,
-      "ok": false,
+      "ok": true,
       "region": "DE"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 47,
-      "ok": false,
+      "ok": true,
       "region": "DE"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 48,
-      "ok": false,
+      "ok": true,
       "region": "DE"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 49,
-      "ok": false,
+      "ok": true,
       "region": "DE"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "index": 50,
-      "ok": false,
+      "ok": true,
       "region": "DE"
     }
   ],
   "complete": true,
-  "failed": 50,
-  "generated_at": "2026-10-15T00:50:31+00:00",
-  "healthy": 0,
+  "failed": 0,
+  "generated_at": "2026-10-15T01:01:51+00:00",
+  "healthy": 50,
   "replaced": 0,
   "replacements": [],
   "shortages": {}
