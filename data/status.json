@@ -1,4 +1,311 @@
 {
-  "complete": false,
-  "note": "No health run has completed yet."
+  "checks": [
+    {
+      "failure_rounds": 1,
+      "index": 1,
+      "ok": false,
+      "region": "HK"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 2,
+      "ok": false,
+      "region": "HK"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 3,
+      "ok": false,
+      "region": "HK"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 4,
+      "ok": false,
+      "region": "HK"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 5,
+      "ok": false,
+      "region": "HK"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 6,
+      "ok": false,
+      "region": "HK"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 7,
+      "ok": false,
+      "region": "HK"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 8,
+      "ok": false,
+      "region": "HK"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 9,
+      "ok": false,
+      "region": "HK"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 10,
+      "ok": false,
+      "region": "HK"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 11,
+      "ok": false,
+      "region": "TW"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 12,
+      "ok": false,
+      "region": "TW"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 13,
+      "ok": false,
+      "region": "TW"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 14,
+      "ok": false,
+      "region": "TW"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 15,
+      "ok": false,
+      "region": "TW"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 16,
+      "ok": false,
+      "region": "TW"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 17,
+      "ok": false,
+      "region": "TW"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 18,
+      "ok": false,
+      "region": "TW"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 19,
+      "ok": false,
+      "region": "TW"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 20,
+      "ok": false,
+      "region": "TW"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 21,
+      "ok": false,
+      "region": "SG"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 22,
+      "ok": false,
+      "region": "SG"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 23,
+      "ok": false,
+      "region": "SG"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 24,
+      "ok": false,
+      "region": "SG"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 25,
+      "ok": false,
+      "region": "SG"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 26,
+      "ok": false,
+      "region": "SG"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 27,
+      "ok": false,
+      "region": "SG"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 28,
+      "ok": false,
+      "region": "SG"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 29,
+      "ok": false,
+      "region": "SG"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 30,
+      "ok": false,
+      "region": "SG"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 31,
+      "ok": false,
+      "region": "US"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 32,
+      "ok": false,
+      "region": "US"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 33,
+      "ok": false,
+      "region": "US"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 34,
+      "ok": false,
+      "region": "US"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 35,
+      "ok": false,
+      "region": "US"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 36,
+      "ok": false,
+      "region": "US"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 37,
+      "ok": false,
+      "region": "US"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 38,
+      "ok": false,
+      "region": "US"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 39,
+      "ok": false,
+      "region": "US"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 40,
+      "ok": false,
+      "region": "US"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 41,
+      "ok": false,
+      "region": "DE"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 42,
+      "ok": false,
+      "region": "DE"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 43,
+      "ok": false,
+      "region": "DE"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 44,
+      "ok": false,
+      "region": "DE"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 45,
+      "ok": false,
+      "region": "DE"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 46,
+      "ok": false,
+      "region": "DE"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 47,
+      "ok": false,
+      "region": "DE"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 48,
+      "ok": false,
+      "region": "DE"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 49,
+      "ok": false,
+      "region": "DE"
+    },
+    {
+      "failure_rounds": 1,
+      "index": 50,
+      "ok": false,
+      "region": "DE"
+    }
+  ],
+  "complete": true,
+  "failed": 50,
+  "generated_at": "2026-10-15T00:50:31+00:00",
+  "healthy": 0,
+  "replaced": 0,
+  "replacements": [],
+  "shortages": {}
 }
