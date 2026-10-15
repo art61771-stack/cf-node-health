@@ -28,7 +28,7 @@ class RunOutcome:
 
 
 def fetch_text(url: str, timeout: float = 20.0) -> str:
-    response = requests.get(url, timeout=timeout, headers={"User-Agent": "cf-node-health/1"})
+    response = requests.get(url, timeout=timeout, headers={"User-Agent": "Quantumult X"})
     response.raise_for_status()
     return response.text
 
