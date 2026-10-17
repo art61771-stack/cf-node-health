@@ -97,7 +97,7 @@
       "region": "TW"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 2,
       "index": 17,
       "ok": false,
       "region": "TW"
@@ -303,9 +303,15 @@
   ],
   "complete": true,
   "failed": 1,
-  "generated_at": "2026-10-17T10:54:13+00:00",
+  "generated_at": "2026-10-17T15:42:17+00:00",
   "healthy": 49,
-  "replaced": 0,
-  "replacements": [],
+  "replaced": 1,
+  "replacements": [
+    {
+      "index": 17,
+      "region": "TW",
+      "replaced": true
+    }
+  ],
   "shortages": {}
 }
