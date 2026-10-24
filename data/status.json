@@ -217,9 +217,9 @@
       "region": "US"
     },
     {
-      "failure_rounds": 2,
+      "failure_rounds": 0,
       "index": 37,
-      "ok": false,
+      "ok": true,
       "region": "US"
     },
     {
@@ -302,16 +302,10 @@
     }
   ],
   "complete": true,
-  "failed": 1,
-  "generated_at": "2026-10-24T16:03:29+00:00",
-  "healthy": 49,
-  "replaced": 1,
-  "replacements": [
-    {
-      "index": 37,
-      "region": "US",
-      "replaced": true
-    }
-  ],
+  "failed": 0,
+  "generated_at": "2026-10-24T20:56:45+00:00",
+  "healthy": 50,
+  "replaced": 0,
+  "replacements": [],
   "shortages": {}
 }
