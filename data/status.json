@@ -43,9 +43,9 @@
       "region": "HK"
     },
     {
-      "failure_rounds": 2,
+      "failure_rounds": 0,
       "index": 8,
-      "ok": false,
+      "ok": true,
       "region": "HK"
     },
     {
@@ -302,16 +302,10 @@
     }
   ],
   "complete": true,
-  "failed": 1,
-  "generated_at": "2026-10-26T13:15:22+00:00",
-  "healthy": 49,
-  "replaced": 1,
-  "replacements": [
-    {
-      "index": 8,
-      "region": "HK",
-      "replaced": true
-    }
-  ],
+  "failed": 0,
+  "generated_at": "2026-10-26T22:45:20+00:00",
+  "healthy": 50,
+  "replaced": 0,
+  "replacements": [],
   "shortages": {}
 }
