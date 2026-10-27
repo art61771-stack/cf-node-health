@@ -145,9 +145,9 @@
       "region": "SG"
     },
     {
-      "failure_rounds": 0,
+      "failure_rounds": 1,
       "index": 25,
-      "ok": true,
+      "ok": false,
       "region": "SG"
     },
     {
@@ -302,9 +302,9 @@
     }
   ],
   "complete": true,
-  "failed": 0,
-  "generated_at": "2026-10-27T05:14:49+00:00",
-  "healthy": 50,
+  "failed": 1,
+  "generated_at": "2026-10-27T22:22:54+00:00",
+  "healthy": 49,
   "replaced": 0,
   "replacements": [],
   "shortages": {}
