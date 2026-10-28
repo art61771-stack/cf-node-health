@@ -73,9 +73,9 @@
       "region": "TW"
     },
     {
-      "failure_rounds": 0,
+      "failure_rounds": 1,
       "index": 13,
-      "ok": true,
+      "ok": false,
       "region": "TW"
     },
     {
@@ -145,7 +145,7 @@
       "region": "SG"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 2,
       "index": 25,
       "ok": false,
       "region": "SG"
@@ -302,10 +302,16 @@
     }
   ],
   "complete": true,
-  "failed": 1,
-  "generated_at": "2026-10-27T22:22:54+00:00",
-  "healthy": 49,
-  "replaced": 0,
-  "replacements": [],
+  "failed": 2,
+  "generated_at": "2026-10-28T05:53:19+00:00",
+  "healthy": 48,
+  "replaced": 1,
+  "replacements": [
+    {
+      "index": 25,
+      "region": "SG",
+      "replaced": true
+    }
+  ],
   "shortages": {}
 }
