@@ -73,7 +73,7 @@
       "region": "TW"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 2,
       "index": 13,
       "ok": false,
       "region": "TW"
@@ -145,9 +145,9 @@
       "region": "SG"
     },
     {
-      "failure_rounds": 2,
+      "failure_rounds": 0,
       "index": 25,
-      "ok": false,
+      "ok": true,
       "region": "SG"
     },
     {
@@ -302,14 +302,14 @@
     }
   ],
   "complete": true,
-  "failed": 2,
-  "generated_at": "2026-10-28T05:53:19+00:00",
-  "healthy": 48,
+  "failed": 1,
+  "generated_at": "2026-10-28T13:09:20+00:00",
+  "healthy": 49,
   "replaced": 1,
   "replacements": [
     {
-      "index": 25,
-      "region": "SG",
+      "index": 13,
+      "region": "TW",
       "replaced": true
     }
   ],
