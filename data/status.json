@@ -55,9 +55,9 @@
       "region": "HK"
     },
     {
-      "failure_rounds": 0,
+      "failure_rounds": 1,
       "index": 10,
-      "ok": true,
+      "ok": false,
       "region": "HK"
     },
     {
@@ -73,7 +73,7 @@
       "region": "TW"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 2,
       "index": 13,
       "ok": false,
       "region": "TW"
@@ -85,9 +85,9 @@
       "region": "TW"
     },
     {
-      "failure_rounds": 0,
+      "failure_rounds": 1,
       "index": 15,
-      "ok": true,
+      "ok": false,
       "region": "TW"
     },
     {
@@ -199,9 +199,9 @@
       "region": "US"
     },
     {
-      "failure_rounds": 0,
+      "failure_rounds": 1,
       "index": 34,
-      "ok": true,
+      "ok": false,
       "region": "US"
     },
     {
@@ -217,9 +217,9 @@
       "region": "US"
     },
     {
-      "failure_rounds": 0,
+      "failure_rounds": 1,
       "index": 37,
-      "ok": true,
+      "ok": false,
       "region": "US"
     },
     {
@@ -302,10 +302,16 @@
     }
   ],
   "complete": true,
-  "failed": 1,
-  "generated_at": "2026-10-31T12:45:11+00:00",
-  "healthy": 49,
-  "replaced": 0,
-  "replacements": [],
+  "failed": 5,
+  "generated_at": "2026-11-01T06:20:31+00:00",
+  "healthy": 45,
+  "replaced": 1,
+  "replacements": [
+    {
+      "index": 13,
+      "region": "TW",
+      "replaced": true
+    }
+  ],
   "shortages": {}
 }
