@@ -55,9 +55,9 @@
       "region": "HK"
     },
     {
-      "failure_rounds": 2,
+      "failure_rounds": 0,
       "index": 10,
-      "ok": false,
+      "ok": true,
       "region": "HK"
     },
     {
@@ -85,9 +85,9 @@
       "region": "TW"
     },
     {
-      "failure_rounds": 2,
+      "failure_rounds": 0,
       "index": 15,
-      "ok": false,
+      "ok": true,
       "region": "TW"
     },
     {
@@ -199,9 +199,9 @@
       "region": "US"
     },
     {
-      "failure_rounds": 2,
+      "failure_rounds": 0,
       "index": 34,
-      "ok": false,
+      "ok": true,
       "region": "US"
     },
     {
@@ -217,9 +217,9 @@
       "region": "US"
     },
     {
-      "failure_rounds": 2,
+      "failure_rounds": 0,
       "index": 37,
-      "ok": false,
+      "ok": true,
       "region": "US"
     },
     {
@@ -295,36 +295,21 @@
       "region": "DE"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 2,
       "index": 50,
       "ok": false,
       "region": "DE"
     }
   ],
   "complete": true,
-  "failed": 5,
-  "generated_at": "2026-11-01T22:09:45+00:00",
-  "healthy": 45,
-  "replaced": 4,
+  "failed": 1,
+  "generated_at": "2026-11-02T21:46:23+00:00",
+  "healthy": 49,
+  "replaced": 1,
   "replacements": [
     {
-      "index": 10,
-      "region": "HK",
-      "replaced": true
-    },
-    {
-      "index": 15,
-      "region": "TW",
-      "replaced": true
-    },
-    {
-      "index": 34,
-      "region": "US",
-      "replaced": true
-    },
-    {
-      "index": 37,
-      "region": "US",
+      "index": 50,
+      "region": "DE",
       "replaced": true
     }
   ],
