@@ -5,6 +5,7 @@ import hashlib
 import json
 import random
 import re
+import statistics
 import urllib.parse
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -12,7 +13,7 @@ from typing import Callable, Iterable
 
 import requests
 
-from .models import CheckResult, Node, REGIONS, REGION_COLO, REGION_LABEL, RANGES
+from .models import BenchmarkResult, CheckResult, Node, REGIONS, REGION_COLO, REGION_LABEL, RANGES
 
 CANDIDATE_URL = "https://raw.githubusercontent.com/wanwushequ/cfyxip/main/random-region/{region}/100.txt"
 _ENDPOINT_RE = re.compile(r"(?<![\w.-])(\[[0-9a-fA-F:]+\]|(?:[A-Za-z0-9-]+\.)+[A-Za-z]{2,}|(?:\d{1,3}\.){3}\d{1,3})(?::(\d{1,5}))?")
@@ -133,6 +134,100 @@ def run_manager(nodes: list[Node], state: dict, checker: Callable[[Node], CheckR
     }
     return RunOutcome(final_nodes, {"version": 1, "failures": clean_failures}, report,
                       render_add(final_nodes, node_uuid) if complete else "", complete)
+
+
+def run_rebuild_best(nodes: list[Node], candidate_loader: Callable[[str], str],
+                     benchmark: Callable[[Node], BenchmarkResult], node_uuid: str,
+                     max_workers: int = 12, pool_limit: int = 100) -> RunOutcome:
+    """Benchmark a bounded full pool and atomically select the best ten per region."""
+    if not 1 <= max_workers <= 12:
+        raise ValueError("rebuild max_workers must be between 1 and 12")
+    if not 10 <= pool_limit <= 100:
+        raise ValueError("pool_limit must be between 10 and 100")
+
+    pools: dict[str, list[Node]] = {}
+    for region in REGIONS:
+        endpoints: list[str] = []
+        seen: set[str] = set()
+        # Preserve current endpoints in the pool, then fill from the source.
+        values = [n.endpoint for n in nodes if n.region == region]
+        values.extend(parse_candidates(candidate_loader(region), region))
+        for endpoint in values:
+            key = endpoint.lower()
+            if key in seen:
+                continue
+            seen.add(key)
+            endpoints.append(endpoint)
+            if len(endpoints) >= pool_limit:
+                break
+        first_index = RANGES[region].start
+        pools[region] = [Node(endpoint, f"/region-auto/{region}{first_index:02d}", region, first_index)
+                         for endpoint in endpoints]
+
+    all_candidates = [candidate for region in REGIONS for candidate in pools[region]]
+    measured: dict[tuple[str, str], BenchmarkResult] = {}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as pool:
+        futures = {pool.submit(benchmark, node): (node.region, node.endpoint.lower())
+                   for node in all_candidates}
+        for future in concurrent.futures.as_completed(futures):
+            measured[futures[future]] = future.result()
+
+    selected: list[Node] = []
+    used: set[str] = set()
+    region_rows: list[dict] = []
+    shortages: dict[str, int] = {}
+    for region in REGIONS:
+        ranked = sorted(
+            pools[region],
+            key=lambda node: (measured[(region, node.endpoint.lower())].rank_key, node.endpoint.lower()),
+        )
+        eligible = [node for node in ranked if measured[(region, node.endpoint.lower())].eligible]
+        chosen: list[Node] = []
+        for node in eligible:
+            endpoint_key = node.endpoint.lower()
+            if endpoint_key in used:
+                continue
+            index = RANGES[region].start + len(chosen)
+            chosen.append(Node(node.endpoint, f"/region-auto/{region}{index:02d}", region, index))
+            used.add(endpoint_key)
+            if len(chosen) == 10:
+                break
+        selected.extend(chosen)
+        if len(chosen) < 10:
+            shortages[region] = 10 - len(chosen)
+        chosen_results = [measured[(region, node.endpoint.lower())] for node in chosen]
+        region_rows.append({
+            "region": region,
+            "pool_checked": len(pools[region]),
+            "eligible": len(eligible),
+            "selected": len(chosen),
+            "selected_latency_ms": _latency_summary(chosen_results),
+        })
+
+    complete = not shortages and _valid_shape(selected)
+    report = {
+        "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "mode": "rebuild_best",
+        "regions": region_rows,
+        "shortages": shortages,
+        "complete": complete,
+    }
+    state = {"version": 1, "failures": {f"{n.region}:{n.index:02d}": 0 for n in selected}} if complete else {
+        "version": 1, "failures": {}
+    }
+    return RunOutcome(selected, state, report, render_add(selected, node_uuid) if complete else "", complete)
+
+
+def _latency_summary(results: list[BenchmarkResult]) -> dict | None:
+    if not results:
+        return None
+    worst = [result.worst_latency * 1000 for result in results]
+    medians = [result.median_latency * 1000 for result in results]
+    return {
+        "worst_max": round(max(worst), 1),
+        "worst_median": round(statistics.median(worst), 1),
+        "median_median": round(statistics.median(medians), 1),
+    }
 
 
 def _valid_shape(nodes: list[Node]) -> bool:

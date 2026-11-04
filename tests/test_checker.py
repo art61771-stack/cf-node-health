@@ -29,6 +29,16 @@ class CheckerTests(unittest.TestCase):
             result = checker.check(Node("example.com:443", "/x", "HK", 1))
         self.assertFalse(result.ok)
 
+    def test_benchmark_records_all_three_complete_attempts(self):
+        checker = VlessChecker(UUID)
+        effects = [None, TimeoutError(), None]
+        with patch.object(VlessChecker, "_attempt", autospec=True, side_effect=effects) as attempt:
+            result = checker.benchmark(Node("example.com:443", "/x", "HK", 1))
+        self.assertEqual(3, attempt.call_count)
+        self.assertEqual((2, 3), (result.successful, result.attempts))
+        self.assertEqual(2, len(result.latency_samples))
+        self.assertFalse(result.eligible)
+
 
 if __name__ == "__main__":
     unittest.main()

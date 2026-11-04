@@ -3,8 +3,14 @@ name: private-node-health
 on:
   schedule:
     - cron: "17 */6 * * *"
+    - cron: "43 3 * * *" # daily bounded full-pool rebuild
   workflow_dispatch:
     inputs:
+      rebuild_best:
+        description: Rebuild all 50 slots from bounded full pools, stability first then latency
+        required: false
+        default: false
+        type: boolean
       force_replace_failed:
         description: Replace a node after this round's failure (still requires failed candidate test)
         required: false
@@ -47,6 +53,9 @@ jobs:
         run: |
           set -euo pipefail
           args=()
+          if [[ "${{ github.event.schedule }}" == "43 3 * * *" || ("${{ github.event_name }}" == "workflow_dispatch" && "${{ inputs.rebuild_best }}" == "true") ]]; then
+            args+=(--rebuild-best)
+          fi
           if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ inputs.force_replace_failed }}" == "true" ]]; then
             args+=(--force-replace-failed)
           fi

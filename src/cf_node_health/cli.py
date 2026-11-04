@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 
 from .checker import VlessChecker
-from .manager import CANDIDATE_URL, fetch_text, load_state, post_maintenance, run_manager
+from .manager import CANDIDATE_URL, fetch_text, load_state, post_maintenance, run_manager, run_rebuild_best
 from .parser import parse_qx
 
 
@@ -21,6 +21,10 @@ def _secret(name: str) -> str:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--force-replace-failed", action="store_true")
+    parser.add_argument("--rebuild-best", action="store_true",
+                        help="benchmark bounded full pools and select stable/fast top ten per region")
+    parser.add_argument("--rebuild-workers", type=int, default=12, help="rebuild concurrency (maximum 12)")
+    parser.add_argument("--pool-limit", type=int, default=100, help="maximum candidates tested per region")
     parser.add_argument("--force-slots", default="", help="comma-separated anonymous slots, e.g. HK:02,HK:05")
     parser.add_argument("--state", default="data/state.json")
     parser.add_argument("--status", default="data/status.json")
@@ -34,12 +38,18 @@ def main(argv: list[str] | None = None) -> int:
         state_path = Path(args.state)
         state = load_state(state_path.read_text() if state_path.exists() else None)
         checker = VlessChecker(node_uuid)
-        force_slots = {x.strip().upper() for x in args.force_slots.split(",") if x.strip()}
-        if any(not __import__("re").fullmatch(r"(?:HK|TW|SG|US|DE):\d{2}", x) for x in force_slots):
-            raise ValueError("invalid force slot")
-        outcome = run_manager(nodes, state, checker.check,
-                              lambda region: fetch_text(CANDIDATE_URL.format(region=region)),
-                              node_uuid, args.force_replace_failed, force_slots=force_slots)
+        if args.rebuild_best:
+            outcome = run_rebuild_best(
+                nodes, lambda region: fetch_text(CANDIDATE_URL.format(region=region)),
+                checker.benchmark, node_uuid, args.rebuild_workers, args.pool_limit,
+            )
+        else:
+            force_slots = {x.strip().upper() for x in args.force_slots.split(",") if x.strip()}
+            if any(not __import__("re").fullmatch(r"(?:HK|TW|SG|US|DE):\d{2}", x) for x in force_slots):
+                raise ValueError("invalid force slot")
+            outcome = run_manager(nodes, state, checker.check,
+                                  lambda region: fetch_text(CANDIDATE_URL.format(region=region)),
+                                  node_uuid, args.force_replace_failed, force_slots=force_slots)
         _write_json(state_path, outcome.state)
         _write_json(Path(args.status), outcome.report)
         if not outcome.complete:
@@ -48,9 +58,15 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"- {region}: {count} slot(s)", file=sys.stderr)
             return 2
         post_maintenance(maintenance_url, maintenance_token, outcome.add_txt, outcome.report)
-        print(f"Health run complete: healthy={outcome.report['healthy']} failed={outcome.report['failed']} replaced={outcome.report['replaced']}")
-        for row in outcome.report["replacements"]:
-            print(f"- {row['region']}/{row['index']:02d}: " + ("replaced" if row["replaced"] else "unfilled"))
+        if args.rebuild_best:
+            print("Full-pool rebuild complete: " + ", ".join(
+                f"{row['region']} checked={row['pool_checked']} eligible={row['eligible']} selected={row['selected']}"
+                for row in outcome.report["regions"]
+            ))
+        else:
+            print(f"Health run complete: healthy={outcome.report['healthy']} failed={outcome.report['failed']} replaced={outcome.report['replaced']}")
+            for row in outcome.report["replacements"]:
+                print(f"- {row['region']}/{row['index']:02d}: " + ("replaced" if row["replaced"] else "unfilled"))
         return 0
     except Exception as exc:
         print(f"Health run failed safely: {type(exc).__name__}. See implementation/tests; sensitive details suppressed.", file=sys.stderr)

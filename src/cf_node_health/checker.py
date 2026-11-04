@@ -8,7 +8,7 @@ from dataclasses import dataclass
 
 import websocket
 
-from .models import CheckResult, Node
+from .models import BenchmarkResult, CheckResult, Node
 from .parser import split_endpoint
 
 PAGES_HOST = "quiet-meadow-pages-qx.pages.dev"
@@ -35,6 +35,20 @@ class VlessChecker:
                 details.append(type(exc).__name__)
                 return CheckResult(False, "/".join(details))
         return CheckResult(True, "ok")
+
+    def benchmark(self, node: Node) -> BenchmarkResult:
+        """Measure exactly three independent complete WSS/VLESS/TLS/HTTP probes."""
+        samples: list[float] = []
+        successful = 0
+        for _ in range(3):
+            started = time.monotonic()
+            try:
+                self._attempt(node)
+            except Exception:
+                continue
+            successful += 1
+            samples.append(time.monotonic() - started)
+        return BenchmarkResult(successful, 3, tuple(samples))
 
     def _attempt(self, node: Node) -> None:
         entry_host, entry_port = split_endpoint(node.endpoint)

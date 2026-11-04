@@ -4,16 +4,19 @@ A private-repository-oriented GitHub Actions job that checks a fixed 50-node Qua
 
 ## Safety and behavior
 
-- Schedule: `17 */6 * * *`; manual runs are also supported.
+- Ordinary health runs use `17 */6 * * *`. A bounded full-pool rebuild runs daily at `43 3 * * *`; either mode can also be started manually.
 - Parses native QX `vless = ...` lines with `password`, `obfs=wss`, `obfs-host`, `obfs-uri`, and `tag`.
 - Requires exactly slots 01–10 HK, 11–20 TW, 21–30 SG, 31–40 US, and 41–50 DE.
-- Each node receives two attempts and passes if either succeeds. Up to eight nodes are checked concurrently.
+- Ordinary health checks retain the strict checker policy: exactly three complete Google 204 probes and all three must pass. Up to eight nodes are checked concurrently.
 - A failed node is retained after its first failed round. Its stable state key is lower-cased `entry endpoint|WebSocket path`. It is eligible for replacement after its second consecutive failed round. A success resets the counter.
 - Manual `force_replace_failed=true` lowers the eligibility threshold for that invocation only; every replacement candidate must still pass its own probe.
-- Candidate lists come from `wanwushequ/cfyxip/random-region/{HK,TW,SG,US,DE}/100.txt`. HK/TW/SG/DE lines must contain HKG/TPE/SIN/FRA respectively. US accepts any listed US source entry because the requested policy is “any US”. Existing endpoints are excluded.
+- Candidate lists come from `wanwushequ/cfyxip/random-region/{HK,TW,SG,US,DE}/100.txt`. HK/TW/SG/DE lines must contain HKG/TPE/SIN/FRA respectively. US accepts any listed US source entry because the requested policy is “any US”. Ordinary replacements exclude existing endpoints.
+- Full-pool rebuild (`--rebuild-best` / manual `rebuild_best=true` / daily rebuild schedule) combines current endpoints with source candidates, deduplicates them, and caps each region at 100 entries. It benchmarks with at most 12 workers and exactly three complete WSS + VLESS + inner TLS + Google `HEAD /generate_204` attempts per endpoint (12 seconds maximum per attempt).
+- Rebuild ordering is stability first (successful attempts descending), then nearest-rank p95/worst latency ascending, then median latency ascending, with endpoint text only as a deterministic final tie-break. Only 3/3 results are eligible. The top ten unique endpoints per region are assigned fixed slots 01–50, with no endpoint duplicated globally.
 - Generated paths are `/region-auto/{region}{index}`, for example `/region-auto/HK01`.
 - The maintenance endpoint receives JSON `{add_txt, expected_sha256, report}` using `Authorization: Bearer ...`.
-- If any slot cannot be filled, no maintenance POST occurs and the workflow fails. State/status are written locally by the process, but because the run exits nonzero the later workflow commit step does not execute.
+- If any ordinary slot cannot be filled, or any rebuild region has fewer than ten eligible globally unique endpoints, no maintenance POST occurs and the workflow fails closed. State/status are written locally by the process, but because the run exits nonzero the later workflow commit step does not execute.
+- Rebuild reports are anonymous: per-region `pool_checked`, `eligible`, `selected`, and aggregate selected latency statistics only. Endpoint strings, full URIs, and UUIDs are never included; the complete candidate/selected lists remain in process memory only.
 - Console output contains aggregate counts and anonymous region/index only. It never intentionally logs subscription content, UUIDs, full node URIs, maintenance token, or candidate endpoint credentials.
 
 ## Required repository secrets
@@ -45,6 +48,8 @@ A real local run requires all four environment variables:
 ```sh
 cf-node-health
 cf-node-health --force-replace-failed
+cf-node-health --rebuild-best                 # defaults: 12 workers, 100/region
+cf-node-health --rebuild-best --rebuild-workers 8 --pool-limit 60
 ```
 
 Do not paste secrets into shell history. The repository never commits generated node lists.
