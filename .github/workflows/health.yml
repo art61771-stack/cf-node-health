@@ -1,8 +1,6 @@
 name: private-node-health
 
 on:
-  schedule:
-    - cron: "17 */6 * * *"
   workflow_dispatch:
     inputs:
       rebuild_best:
