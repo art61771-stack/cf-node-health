@@ -2,310 +2,396 @@
   "checks": [
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 1,
       "ok": true,
       "region": "HK"
     },
     {
-      "failure_rounds": 0,
+      "failure_rounds": 2,
+      "forced": true,
       "index": 2,
-      "ok": true,
+      "ok": false,
       "region": "HK"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 3,
       "ok": true,
       "region": "HK"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 4,
       "ok": true,
       "region": "HK"
     },
     {
-      "failure_rounds": 0,
+      "failure_rounds": 2,
+      "forced": true,
       "index": 5,
-      "ok": true,
+      "ok": false,
       "region": "HK"
     },
     {
-      "failure_rounds": 0,
+      "failure_rounds": 2,
+      "forced": true,
       "index": 6,
-      "ok": true,
+      "ok": false,
       "region": "HK"
     },
     {
-      "failure_rounds": 0,
+      "failure_rounds": 2,
+      "forced": true,
       "index": 7,
-      "ok": true,
+      "ok": false,
       "region": "HK"
     },
     {
-      "failure_rounds": 0,
+      "failure_rounds": 2,
+      "forced": true,
       "index": 8,
-      "ok": true,
+      "ok": false,
       "region": "HK"
     },
     {
-      "failure_rounds": 0,
+      "failure_rounds": 2,
+      "forced": true,
       "index": 9,
-      "ok": true,
+      "ok": false,
       "region": "HK"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 10,
       "ok": true,
       "region": "HK"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 11,
       "ok": true,
       "region": "TW"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 12,
       "ok": true,
       "region": "TW"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 13,
       "ok": true,
       "region": "TW"
     },
     {
-      "failure_rounds": 0,
+      "failure_rounds": 1,
+      "forced": false,
       "index": 14,
-      "ok": true,
+      "ok": false,
       "region": "TW"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 15,
       "ok": true,
       "region": "TW"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 16,
       "ok": true,
       "region": "TW"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 17,
       "ok": true,
       "region": "TW"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 18,
       "ok": true,
       "region": "TW"
     },
     {
-      "failure_rounds": 0,
+      "failure_rounds": 1,
+      "forced": false,
       "index": 19,
-      "ok": true,
+      "ok": false,
       "region": "TW"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 20,
       "ok": true,
       "region": "TW"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 21,
       "ok": true,
       "region": "SG"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 22,
       "ok": true,
       "region": "SG"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 23,
       "ok": true,
       "region": "SG"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 24,
       "ok": true,
       "region": "SG"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 25,
       "ok": true,
       "region": "SG"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 26,
       "ok": true,
       "region": "SG"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 27,
       "ok": true,
       "region": "SG"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 28,
       "ok": true,
       "region": "SG"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 2,
+      "forced": false,
       "index": 29,
       "ok": false,
       "region": "SG"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 30,
       "ok": true,
       "region": "SG"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 31,
       "ok": true,
       "region": "US"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 32,
       "ok": true,
       "region": "US"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 33,
       "ok": true,
       "region": "US"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 34,
       "ok": true,
       "region": "US"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 35,
       "ok": true,
       "region": "US"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 36,
       "ok": true,
       "region": "US"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 37,
       "ok": true,
       "region": "US"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 38,
       "ok": true,
       "region": "US"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 39,
       "ok": true,
       "region": "US"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 40,
       "ok": true,
       "region": "US"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 41,
       "ok": true,
       "region": "DE"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 42,
       "ok": true,
       "region": "DE"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 43,
       "ok": true,
       "region": "DE"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 44,
       "ok": true,
       "region": "DE"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 45,
       "ok": true,
       "region": "DE"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 46,
       "ok": true,
       "region": "DE"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 47,
       "ok": true,
       "region": "DE"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 48,
       "ok": true,
       "region": "DE"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 49,
       "ok": true,
       "region": "DE"
     },
     {
       "failure_rounds": 0,
+      "forced": false,
       "index": 50,
       "ok": true,
       "region": "DE"
     }
   ],
   "complete": true,
-  "failed": 1,
-  "generated_at": "2026-11-04T06:38:48+00:00",
-  "healthy": 49,
-  "replaced": 0,
-  "replacements": [],
+  "failed": 9,
+  "generated_at": "2026-11-04T07:12:50+00:00",
+  "healthy": 41,
+  "replaced": 7,
+  "replacements": [
+    {
+      "index": 2,
+      "region": "HK",
+      "replaced": true
+    },
+    {
+      "index": 5,
+      "region": "HK",
+      "replaced": true
+    },
+    {
+      "index": 6,
+      "region": "HK",
+      "replaced": true
+    },
+    {
+      "index": 7,
+      "region": "HK",
+      "replaced": true
+    },
+    {
+      "index": 8,
+      "region": "HK",
+      "replaced": true
+    },
+    {
+      "index": 9,
+      "region": "HK",
+      "replaced": true
+    },
+    {
+      "index": 29,
+      "region": "SG",
+      "replaced": true
+    }
+  ],
   "shortages": {}
 }
