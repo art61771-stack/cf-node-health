@@ -52,6 +52,18 @@ class ManagerTests(unittest.TestCase):
         self.assertFalse(out.complete)
         self.assertEqual("", out.add_txt)
 
+    def test_force_slot_replaces_even_when_runner_passes(self):
+        original = nodes()
+        def loader(region):
+            marker = {"HK": "HKG", "TW": "TPE", "SG": "SIN", "US": "LAX", "DE": "FRA"}[region]
+            return f"198.51.100.9:443 {marker}"
+        out = run_manager(original, {"failures": {}}, lambda n: CheckResult(True), loader, UUID,
+                          rng=random.Random(1), force_slots={"HK:02"})
+        self.assertTrue(out.complete)
+        self.assertEqual(1, out.report["replaced"])
+        self.assertNotEqual(original[1].endpoint, out.nodes[1].endpoint)
+        self.assertTrue(next(x for x in out.report["checks"] if x["index"] == 2)["forced"])
+
     def test_candidate_region_marker(self):
         values = parse_candidates("1.1.1.1:443 HKG\n2.2.2.2:443 LAX", "HK")
         self.assertEqual(["1.1.1.1:443"], values)

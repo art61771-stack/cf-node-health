@@ -10,6 +10,11 @@ on:
         required: false
         default: false
         type: boolean
+      force_slots:
+        description: Anonymous phone-confirmed failed slots, e.g. HK:02,HK:05
+        required: false
+        default: ''
+        type: string
 
 permissions:
   contents: write
@@ -44,6 +49,9 @@ jobs:
           args=()
           if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ inputs.force_replace_failed }}" == "true" ]]; then
             args+=(--force-replace-failed)
+          fi
+          if [[ -n "${{ inputs.force_slots || '' }}" ]]; then
+            args+=(--force-slots "${{ inputs.force_slots }}")
           fi
           cf-node-health "${args[@]}"
       - name: Commit changed state and generated files

@@ -21,18 +21,20 @@ class VlessChecker:
     node_uuid: str
     connect_timeout: float = 8.0
     io_timeout: float = 8.0
-    total_timeout: float = 20.0
-    attempts: int = 2
+    total_timeout: float = 12.0
+    attempts: int = 3
 
     def check(self, node: Node) -> CheckResult:
         details: list[str] = []
+        # Require every Google 204 probe to pass. A node that succeeds only
+        # intermittently is not suitable for a phone subscription.
         for _ in range(self.attempts):
             try:
                 self._attempt(node)
-                return CheckResult(True, "ok")
             except Exception as exc:  # deliberately summarized; never include endpoint/UUID
                 details.append(type(exc).__name__)
-        return CheckResult(False, "/".join(details))
+                return CheckResult(False, "/".join(details))
+        return CheckResult(True, "ok")
 
     def _attempt(self, node: Node) -> None:
         entry_host, entry_port = split_endpoint(node.endpoint)

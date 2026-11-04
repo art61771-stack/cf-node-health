@@ -68,7 +68,8 @@ def check_parallel(nodes: Iterable[Node], check: Callable[[Node], CheckResult], 
 
 def run_manager(nodes: list[Node], state: dict, checker: Callable[[Node], CheckResult],
                 candidate_loader: Callable[[str], str], node_uuid: str,
-                force_replace_failed: bool = False, rng: random.Random | None = None) -> RunOutcome:
+                force_replace_failed: bool = False, rng: random.Random | None = None,
+                force_slots: set[str] | None = None) -> RunOutcome:
     rng = rng or random.SystemRandom()
     previous = state.get("failures", {})
     results = check_parallel(nodes, checker)
@@ -77,13 +78,16 @@ def run_manager(nodes: list[Node], state: dict, checker: Callable[[Node], CheckR
     replace: list[Node] = []
     check_rows: list[dict] = []
     threshold = 1 if force_replace_failed else 2
+    force_slots = force_slots or set()
     for node in nodes:
         result = results[node.key]
-        count = 0 if result.ok else int(previous.get(slot_key(node), 0)) + 1
+        forced = slot_key(node) in force_slots
+        count = (threshold if forced else (0 if result.ok else int(previous.get(slot_key(node), 0)) + 1))
         failures[slot_key(node)] = count
-        if not result.ok and count >= threshold:
+        if forced or (not result.ok and count >= threshold):
             replace.append(node)
-        check_rows.append({"region": node.region, "index": node.index, "ok": result.ok, "failure_rounds": count})
+        check_rows.append({"region": node.region, "index": node.index, "ok": result.ok and not forced,
+                           "forced": forced, "failure_rounds": count})
 
     used = {node.endpoint.lower() for node in nodes}
     replacements: dict[int, Node] = {}
