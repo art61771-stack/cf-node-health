@@ -1,17 +1,17 @@
 {
   "checks": [
     {
-      "failure_rounds": 2,
-      "forced": true,
+      "failure_rounds": 0,
+      "forced": false,
       "index": 1,
-      "ok": false,
+      "ok": true,
       "region": "HK"
     },
     {
-      "failure_rounds": 2,
-      "forced": true,
+      "failure_rounds": 0,
+      "forced": false,
       "index": 2,
-      "ok": false,
+      "ok": true,
       "region": "HK"
     },
     {
@@ -22,7 +22,7 @@
       "region": "HK"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 2,
       "forced": false,
       "index": 4,
       "ok": false,
@@ -43,17 +43,17 @@
       "region": "HK"
     },
     {
-      "failure_rounds": 0,
-      "forced": false,
+      "failure_rounds": 2,
+      "forced": true,
       "index": 7,
-      "ok": true,
+      "ok": false,
       "region": "HK"
     },
     {
-      "failure_rounds": 0,
-      "forced": false,
+      "failure_rounds": 2,
+      "forced": true,
       "index": 8,
-      "ok": true,
+      "ok": false,
       "region": "HK"
     },
     {
@@ -78,10 +78,10 @@
       "region": "TW"
     },
     {
-      "failure_rounds": 0,
-      "forced": false,
+      "failure_rounds": 2,
+      "forced": true,
       "index": 12,
-      "ok": true,
+      "ok": false,
       "region": "TW"
     },
     {
@@ -92,10 +92,10 @@
       "region": "TW"
     },
     {
-      "failure_rounds": 1,
+      "failure_rounds": 0,
       "forced": false,
       "index": 14,
-      "ok": false,
+      "ok": true,
       "region": "TW"
     },
     {
@@ -113,10 +113,10 @@
       "region": "TW"
     },
     {
-      "failure_rounds": 0,
-      "forced": false,
+      "failure_rounds": 2,
+      "forced": true,
       "index": 17,
-      "ok": true,
+      "ok": false,
       "region": "TW"
     },
     {
@@ -352,19 +352,34 @@
     }
   ],
   "complete": true,
-  "failed": 4,
-  "generated_at": "2026-11-04T08:42:28+00:00",
-  "healthy": 46,
-  "replaced": 2,
+  "failed": 5,
+  "generated_at": "2026-11-04T08:52:00+00:00",
+  "healthy": 45,
+  "replaced": 5,
   "replacements": [
     {
-      "index": 1,
+      "index": 4,
       "region": "HK",
       "replaced": true
     },
     {
-      "index": 2,
+      "index": 7,
       "region": "HK",
+      "replaced": true
+    },
+    {
+      "index": 8,
+      "region": "HK",
+      "replaced": true
+    },
+    {
+      "index": 12,
+      "region": "TW",
+      "replaced": true
+    },
+    {
+      "index": 17,
+      "region": "TW",
       "replaced": true
     }
   ],
