@@ -22,10 +22,10 @@
       "region": "HK"
     },
     {
-      "failure_rounds": 2,
+      "failure_rounds": 0,
       "forced": false,
       "index": 4,
-      "ok": false,
+      "ok": true,
       "region": "HK"
     },
     {
@@ -50,10 +50,10 @@
       "region": "HK"
     },
     {
-      "failure_rounds": 2,
-      "forced": true,
+      "failure_rounds": 0,
+      "forced": false,
       "index": 8,
-      "ok": false,
+      "ok": true,
       "region": "HK"
     },
     {
@@ -78,24 +78,24 @@
       "region": "TW"
     },
     {
+      "failure_rounds": 0,
+      "forced": false,
+      "index": 12,
+      "ok": true,
+      "region": "TW"
+    },
+    {
       "failure_rounds": 2,
       "forced": true,
-      "index": 12,
+      "index": 13,
       "ok": false,
       "region": "TW"
     },
     {
-      "failure_rounds": 0,
-      "forced": false,
-      "index": 13,
-      "ok": true,
-      "region": "TW"
-    },
-    {
-      "failure_rounds": 0,
+      "failure_rounds": 1,
       "forced": false,
       "index": 14,
-      "ok": true,
+      "ok": false,
       "region": "TW"
     },
     {
@@ -352,28 +352,18 @@
     }
   ],
   "complete": true,
-  "failed": 5,
-  "generated_at": "2026-11-04T08:52:00+00:00",
-  "healthy": 45,
-  "replaced": 5,
+  "failed": 4,
+  "generated_at": "2026-11-04T08:58:14+00:00",
+  "healthy": 46,
+  "replaced": 3,
   "replacements": [
-    {
-      "index": 4,
-      "region": "HK",
-      "replaced": true
-    },
     {
       "index": 7,
       "region": "HK",
       "replaced": true
     },
     {
-      "index": 8,
-      "region": "HK",
-      "replaced": true
-    },
-    {
-      "index": 12,
+      "index": 13,
       "region": "TW",
       "replaced": true
     },
