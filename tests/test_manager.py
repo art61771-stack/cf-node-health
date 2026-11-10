@@ -64,6 +64,28 @@ class ManagerTests(unittest.TestCase):
         self.assertNotEqual(original[1].endpoint, out.nodes[1].endpoint)
         self.assertTrue(next(x for x in out.report["checks"] if x["index"] == 2)["forced"])
 
+    def test_protected_anchor_not_auto_replaced_but_force_can_override(self):
+        original = nodes()
+        def loader(region): return "198.51.100.9:443 HKG"
+        out = run_manager(original, {"failures": {}}, lambda n: CheckResult(n.index != 6), loader, UUID,
+                          force_replace_failed=True, rng=random.Random(1))
+        self.assertEqual(original[5].endpoint, out.nodes[5].endpoint)
+        row = next(x for x in out.report["checks"] if x["index"] == 6)
+        self.assertTrue(row["protected"])
+        forced = run_manager(original, {"failures": {}}, lambda n: CheckResult(True), loader, UUID,
+                             force_slots={"HK:06"}, rng=random.Random(1))
+        self.assertNotEqual(original[5].endpoint, forced.nodes[5].endpoint)
+
+    def test_rejected_endpoint_is_not_reused(self):
+        original = nodes()
+        rejected = hashlib.sha256(b"198.51.100.9:443").hexdigest()
+        state = {"failures": {"HK:01": 1}, "rejected": [rejected]}
+        def loader(region): return "198.51.100.9:443 HKG\n198.51.100.10:443 HKG"
+        out = run_manager(original, state, lambda n: CheckResult(not n.endpoint.startswith("old-1.")),
+                          loader, UUID, rng=random.Random(1))
+        self.assertEqual("198.51.100.10:443", out.nodes[0].endpoint)
+        self.assertIn(rejected, out.state["rejected"])
+
     def test_candidate_region_marker(self):
         values = parse_candidates("1.1.1.1:443 HKG\n2.2.2.2:443 LAX", "HK")
         self.assertEqual(["1.1.1.1:443"], values)

@@ -36,12 +36,15 @@ def fetch_text(url: str, timeout: float = 20.0) -> str:
 
 def load_state(text: str | None) -> dict:
     if not text:
-        return {"version": 1, "failures": {}}
+        return {"version": 2, "failures": {}, "rejected": []}
     state = json.loads(text)
     failures = state.get("failures", {})
-    if not isinstance(failures, dict):
-        raise ValueError("invalid state failures")
-    return {"version": 1, "failures": {str(k): max(0, int(v)) for k, v in failures.items()}}
+    rejected = state.get("rejected", [])
+    if not isinstance(failures, dict) or not isinstance(rejected, list):
+        raise ValueError("invalid state")
+    clean_rejected = sorted({str(x).lower() for x in rejected if re.fullmatch(r"[0-9a-f]{64}", str(x).lower())})
+    return {"version": 2, "failures": {str(k): max(0, int(v)) for k, v in failures.items()},
+            "rejected": clean_rejected}
 
 
 def parse_candidates(text: str, region: str) -> list[str]:
@@ -73,22 +76,27 @@ def run_manager(nodes: list[Node], state: dict, checker: Callable[[Node], CheckR
                 force_slots: set[str] | None = None) -> RunOutcome:
     rng = rng or random.SystemRandom()
     previous = state.get("failures", {})
+    rejected = set(state.get("rejected", []))
+    endpoint_hash = lambda value: hashlib.sha256(value.lower().encode()).hexdigest()
     results = check_parallel(nodes, checker)
     failures: dict[str, int] = {}
     slot_key = lambda node: f"{node.region}:{node.index:02d}"
     replace: list[Node] = []
     check_rows: list[dict] = []
     threshold = 1 if force_replace_failed else 2
+    protected_slots = {"HK:06"}
     force_slots = force_slots or set()
     for node in nodes:
         result = results[node.key]
-        forced = slot_key(node) in force_slots
-        count = (threshold if forced else (0 if result.ok else int(previous.get(slot_key(node), 0)) + 1))
-        failures[slot_key(node)] = count
-        if forced or (not result.ok and count >= threshold):
+        key = slot_key(node)
+        forced = key in force_slots
+        protected = key in protected_slots and not forced
+        count = (0 if protected else (threshold if forced else (0 if result.ok else int(previous.get(key, 0)) + 1)))
+        failures[key] = count
+        if not protected and (forced or (not result.ok and count >= threshold)):
             replace.append(node)
-        check_rows.append({"region": node.region, "index": node.index, "ok": result.ok and not forced,
-                           "forced": forced, "failure_rounds": count})
+        check_rows.append({"region": node.region, "index": node.index, "ok": (result.ok or protected) and not forced,
+                           "forced": forced, "protected": protected, "failure_rounds": count})
 
     used = {node.endpoint.lower() for node in nodes}
     replacements: dict[int, Node] = {}
@@ -100,12 +108,20 @@ def run_manager(nodes: list[Node], state: dict, checker: Callable[[Node], CheckR
             continue
         candidates = parse_candidates(candidate_loader(region), region)
         rng.shuffle(candidates)
-        available = [value for value in candidates if value.lower() not in used]
+        def candidate_priority(value: str) -> tuple[int, str]:
+            host, _, port = value.rpartition(":")
+            ipv4 = bool(re.fullmatch(r"(?:\d{1,3}\.){3}\d{1,3}", host))
+            return (0 if ipv4 and port == "443" else 1, value.lower())
+        candidates.sort(key=candidate_priority)
+        available = [value for value in candidates if value.lower() not in used and endpoint_hash(value) not in rejected]
         for old in targets:
             accepted: Node | None = None
             while available:
                 endpoint = available.pop()
                 candidate = Node(endpoint, f"/region-auto/{region}{old.index:02d}", region, old.index, old.tag)
+                # Prefer deterministic characteristics observed on phone-stable
+                # anchors: numeric IPv4 on standard TLS 443. Other endpoints
+                # remain fallback candidates for regions with small pools.
                 used.add(endpoint.lower())
                 if checker(candidate).ok:
                     accepted = candidate
@@ -115,6 +131,7 @@ def run_manager(nodes: list[Node], state: dict, checker: Callable[[Node], CheckR
                 replacement_rows.append({"region": region, "index": old.index, "replaced": False})
             else:
                 replacements[old.index] = accepted
+                rejected.add(endpoint_hash(old.endpoint))
                 failures[slot_key(old)] = 0
                 replacement_rows.append({"region": region, "index": old.index, "replaced": True})
 
@@ -132,7 +149,7 @@ def run_manager(nodes: list[Node], state: dict, checker: Callable[[Node], CheckR
         "shortages": shortages,
         "complete": complete,
     }
-    return RunOutcome(final_nodes, {"version": 1, "failures": clean_failures}, report,
+    return RunOutcome(final_nodes, {"version": 2, "failures": clean_failures, "rejected": sorted(rejected)}, report,
                       render_add(final_nodes, node_uuid) if complete else "", complete)
 
 

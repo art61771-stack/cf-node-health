@@ -1,6 +1,8 @@
 name: private-node-health
 
 on:
+  schedule:
+    - cron: "17 21 * * *" # 05:17 Asia/Shanghai
   workflow_dispatch:
     inputs:
       rebuild_best:
@@ -53,7 +55,7 @@ jobs:
           if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ inputs.rebuild_best }}" == "true" ]]; then
             args+=(--rebuild-best)
           fi
-          if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ inputs.force_replace_failed }}" == "true" ]]; then
+          if [[ "${{ github.event_name }}" == "schedule" || ("${{ github.event_name }}" == "workflow_dispatch" && "${{ inputs.force_replace_failed }}" == "true") ]]; then
             args+=(--force-replace-failed)
           fi
           if [[ -n "${{ inputs.force_slots || '' }}" ]]; then
