@@ -33,7 +33,7 @@
     "TW:11": 0,
     "TW:12": 0,
     "TW:13": 0,
-    "TW:14": 1,
+    "TW:14": 0,
     "TW:15": 0,
     "TW:16": 0,
     "TW:17": 0,
@@ -51,5 +51,13 @@
     "US:39": 0,
     "US:40": 0
   },
-  "version": 1
+  "rejected": [
+    "137b0ed75e9e6b799eabd695dc441a1fcb621e3b8411bcf813cc0e5f7ed506ff",
+    "41ad1af403a59fd8b055e5f1b870ed3d675c81563bc22c7560a31f5bd1d3cd74",
+    "bc2114d6bd4b09af9d8856bf97d90a1ba6591e912da04ba28ca1ec9a16573517",
+    "c6ddf0cc9df0732568d1cbb24a1d0b2442e8318dbf9eb99802cf915531a70ad5",
+    "c72bf32c18c0a9c2ea219c45987715dc784ec847a30efe7df640734daaf0b7cd",
+    "cde61ec0084f61f1b2195b2157c3357f2b028df7f5c8605394bc83d6a0840ed2"
+  ],
+  "version": 2
 }

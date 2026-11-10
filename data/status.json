@@ -5,6 +5,7 @@
       "forced": false,
       "index": 1,
       "ok": true,
+      "protected": false,
       "region": "HK"
     },
     {
@@ -12,6 +13,7 @@
       "forced": false,
       "index": 2,
       "ok": true,
+      "protected": false,
       "region": "HK"
     },
     {
@@ -19,13 +21,15 @@
       "forced": false,
       "index": 3,
       "ok": true,
+      "protected": false,
       "region": "HK"
     },
     {
-      "failure_rounds": 0,
+      "failure_rounds": 1,
       "forced": false,
       "index": 4,
-      "ok": true,
+      "ok": false,
+      "protected": false,
       "region": "HK"
     },
     {
@@ -33,6 +37,7 @@
       "forced": false,
       "index": 5,
       "ok": true,
+      "protected": false,
       "region": "HK"
     },
     {
@@ -40,13 +45,15 @@
       "forced": false,
       "index": 6,
       "ok": true,
+      "protected": true,
       "region": "HK"
     },
     {
-      "failure_rounds": 2,
-      "forced": true,
+      "failure_rounds": 0,
+      "forced": false,
       "index": 7,
-      "ok": false,
+      "ok": true,
+      "protected": false,
       "region": "HK"
     },
     {
@@ -54,6 +61,7 @@
       "forced": false,
       "index": 8,
       "ok": true,
+      "protected": false,
       "region": "HK"
     },
     {
@@ -61,6 +69,7 @@
       "forced": false,
       "index": 9,
       "ok": true,
+      "protected": false,
       "region": "HK"
     },
     {
@@ -68,13 +77,15 @@
       "forced": false,
       "index": 10,
       "ok": true,
+      "protected": false,
       "region": "HK"
     },
     {
-      "failure_rounds": 0,
+      "failure_rounds": 1,
       "forced": false,
       "index": 11,
-      "ok": true,
+      "ok": false,
+      "protected": false,
       "region": "TW"
     },
     {
@@ -82,27 +93,31 @@
       "forced": false,
       "index": 12,
       "ok": true,
-      "region": "TW"
-    },
-    {
-      "failure_rounds": 2,
-      "forced": true,
-      "index": 13,
-      "ok": false,
+      "protected": false,
       "region": "TW"
     },
     {
       "failure_rounds": 1,
       "forced": false,
-      "index": 14,
+      "index": 13,
       "ok": false,
+      "protected": false,
       "region": "TW"
     },
     {
       "failure_rounds": 0,
       "forced": false,
-      "index": 15,
+      "index": 14,
       "ok": true,
+      "protected": false,
+      "region": "TW"
+    },
+    {
+      "failure_rounds": 1,
+      "forced": false,
+      "index": 15,
+      "ok": false,
+      "protected": false,
       "region": "TW"
     },
     {
@@ -110,13 +125,15 @@
       "forced": false,
       "index": 16,
       "ok": true,
+      "protected": false,
       "region": "TW"
     },
     {
-      "failure_rounds": 2,
-      "forced": true,
+      "failure_rounds": 0,
+      "forced": false,
       "index": 17,
-      "ok": false,
+      "ok": true,
+      "protected": false,
       "region": "TW"
     },
     {
@@ -124,6 +141,7 @@
       "forced": false,
       "index": 18,
       "ok": true,
+      "protected": false,
       "region": "TW"
     },
     {
@@ -131,6 +149,7 @@
       "forced": false,
       "index": 19,
       "ok": true,
+      "protected": false,
       "region": "TW"
     },
     {
@@ -138,6 +157,7 @@
       "forced": false,
       "index": 20,
       "ok": true,
+      "protected": false,
       "region": "TW"
     },
     {
@@ -145,6 +165,7 @@
       "forced": false,
       "index": 21,
       "ok": true,
+      "protected": false,
       "region": "SG"
     },
     {
@@ -152,6 +173,7 @@
       "forced": false,
       "index": 22,
       "ok": true,
+      "protected": false,
       "region": "SG"
     },
     {
@@ -159,6 +181,7 @@
       "forced": false,
       "index": 23,
       "ok": true,
+      "protected": false,
       "region": "SG"
     },
     {
@@ -166,6 +189,7 @@
       "forced": false,
       "index": 24,
       "ok": true,
+      "protected": false,
       "region": "SG"
     },
     {
@@ -173,6 +197,7 @@
       "forced": false,
       "index": 25,
       "ok": true,
+      "protected": false,
       "region": "SG"
     },
     {
@@ -180,6 +205,7 @@
       "forced": false,
       "index": 26,
       "ok": true,
+      "protected": false,
       "region": "SG"
     },
     {
@@ -187,6 +213,7 @@
       "forced": false,
       "index": 27,
       "ok": true,
+      "protected": false,
       "region": "SG"
     },
     {
@@ -194,6 +221,7 @@
       "forced": false,
       "index": 28,
       "ok": true,
+      "protected": false,
       "region": "SG"
     },
     {
@@ -201,13 +229,15 @@
       "forced": false,
       "index": 29,
       "ok": true,
+      "protected": false,
       "region": "SG"
     },
     {
-      "failure_rounds": 0,
+      "failure_rounds": 1,
       "forced": false,
       "index": 30,
-      "ok": true,
+      "ok": false,
+      "protected": false,
       "region": "SG"
     },
     {
@@ -215,6 +245,7 @@
       "forced": false,
       "index": 31,
       "ok": true,
+      "protected": false,
       "region": "US"
     },
     {
@@ -222,6 +253,7 @@
       "forced": false,
       "index": 32,
       "ok": true,
+      "protected": false,
       "region": "US"
     },
     {
@@ -229,6 +261,7 @@
       "forced": false,
       "index": 33,
       "ok": true,
+      "protected": false,
       "region": "US"
     },
     {
@@ -236,6 +269,7 @@
       "forced": false,
       "index": 34,
       "ok": true,
+      "protected": false,
       "region": "US"
     },
     {
@@ -243,6 +277,7 @@
       "forced": false,
       "index": 35,
       "ok": true,
+      "protected": false,
       "region": "US"
     },
     {
@@ -250,6 +285,7 @@
       "forced": false,
       "index": 36,
       "ok": true,
+      "protected": false,
       "region": "US"
     },
     {
@@ -257,6 +293,7 @@
       "forced": false,
       "index": 37,
       "ok": true,
+      "protected": false,
       "region": "US"
     },
     {
@@ -264,6 +301,7 @@
       "forced": false,
       "index": 38,
       "ok": true,
+      "protected": false,
       "region": "US"
     },
     {
@@ -271,6 +309,7 @@
       "forced": false,
       "index": 39,
       "ok": true,
+      "protected": false,
       "region": "US"
     },
     {
@@ -278,6 +317,7 @@
       "forced": false,
       "index": 40,
       "ok": true,
+      "protected": false,
       "region": "US"
     },
     {
@@ -285,6 +325,7 @@
       "forced": false,
       "index": 41,
       "ok": true,
+      "protected": false,
       "region": "DE"
     },
     {
@@ -292,6 +333,7 @@
       "forced": false,
       "index": 42,
       "ok": true,
+      "protected": false,
       "region": "DE"
     },
     {
@@ -299,13 +341,15 @@
       "forced": false,
       "index": 43,
       "ok": true,
+      "protected": false,
       "region": "DE"
     },
     {
-      "failure_rounds": 0,
+      "failure_rounds": 1,
       "forced": false,
       "index": 44,
-      "ok": true,
+      "ok": false,
+      "protected": false,
       "region": "DE"
     },
     {
@@ -313,6 +357,7 @@
       "forced": false,
       "index": 45,
       "ok": true,
+      "protected": false,
       "region": "DE"
     },
     {
@@ -320,6 +365,7 @@
       "forced": false,
       "index": 46,
       "ok": true,
+      "protected": false,
       "region": "DE"
     },
     {
@@ -327,6 +373,7 @@
       "forced": false,
       "index": 47,
       "ok": true,
+      "protected": false,
       "region": "DE"
     },
     {
@@ -334,6 +381,7 @@
       "forced": false,
       "index": 48,
       "ok": true,
+      "protected": false,
       "region": "DE"
     },
     {
@@ -341,6 +389,7 @@
       "forced": false,
       "index": 49,
       "ok": true,
+      "protected": false,
       "region": "DE"
     },
     {
@@ -348,18 +397,24 @@
       "forced": false,
       "index": 50,
       "ok": true,
+      "protected": false,
       "region": "DE"
     }
   ],
   "complete": true,
-  "failed": 4,
-  "generated_at": "2026-11-04T08:58:14+00:00",
-  "healthy": 46,
-  "replaced": 3,
+  "failed": 6,
+  "generated_at": "2026-11-10T00:06:20+00:00",
+  "healthy": 44,
+  "replaced": 6,
   "replacements": [
     {
-      "index": 7,
+      "index": 4,
       "region": "HK",
+      "replaced": true
+    },
+    {
+      "index": 11,
+      "region": "TW",
       "replaced": true
     },
     {
@@ -368,8 +423,18 @@
       "replaced": true
     },
     {
-      "index": 17,
+      "index": 15,
       "region": "TW",
+      "replaced": true
+    },
+    {
+      "index": 30,
+      "region": "SG",
+      "replaced": true
+    },
+    {
+      "index": 44,
+      "region": "DE",
       "replaced": true
     }
   ],
