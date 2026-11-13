@@ -34,7 +34,22 @@ class ManagerTests(unittest.TestCase):
         self.assertEqual(1, out.report["replaced"])
         self.assertNotEqual(original[0].endpoint, out.nodes[0].endpoint)
         self.assertEqual(50, len(out.add_txt.strip().splitlines()))
-        self.assertIn("path=%2Fregion-auto%2FHK01", out.add_txt)
+        self.assertIn("path=%2Fold%2F1", out.add_txt)
+        self.assertEqual(original[0].path, out.nodes[0].path)
+
+    def test_proxy_path_preserved_and_ipv4_443_preferred(self):
+        from cf_node_health.manager import render_add
+        from urllib.parse import urlsplit, parse_qs
+        original = nodes()
+        path = '/region-auto/HK01/proxyip=203.0.113.9:443'
+        original[0] = Node(original[0].endpoint, path, 'HK', 1)
+        loader = lambda region: '198.51.100.9:8443 HKG\n198.51.100.10:443 HKG'
+        out = run_manager(original, {'failures': {}}, lambda n: CheckResult(True), loader, UUID,
+                          force_slots={'HK:01'})
+        self.assertEqual('198.51.100.10:443', out.nodes[0].endpoint)
+        self.assertEqual(path, out.nodes[0].path)
+        first = render_add(out.nodes, UUID).splitlines()[0]
+        self.assertEqual(path, parse_qs(urlsplit(first).query)['path'][0])
 
     def test_first_failure_not_replaced(self):
         original = nodes()

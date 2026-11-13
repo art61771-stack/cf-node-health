@@ -117,8 +117,8 @@ def run_manager(nodes: list[Node], state: dict, checker: Callable[[Node], CheckR
         for old in targets:
             accepted: Node | None = None
             while available:
-                endpoint = available.pop()
-                candidate = Node(endpoint, f"/region-auto/{region}{old.index:02d}", region, old.index, old.tag)
+                endpoint = available.pop(0)
+                candidate = Node(endpoint, old.path, region, old.index, old.tag)
                 # Prefer deterministic characteristics observed on phone-stable
                 # anchors: numeric IPv4 on standard TLS 443. Other endpoints
                 # remain fallback candidates for regions with small pools.
@@ -258,7 +258,9 @@ def render_add(nodes: list[Node], node_uuid: str) -> str:
     for node in sorted(nodes, key=lambda n: n.index):
         endpoint = node.endpoint
         label = f"{REGION_LABEL[node.region]} {node.index:02d}"
-        canonical_path = f"/region-auto/{node.region}{node.index:02d}"
+        canonical_path = node.path
+        if not canonical_path.startswith('/') or '\r' in canonical_path or '\n' in canonical_path:
+            raise ValueError('invalid websocket path')
         query = urllib.parse.urlencode({
             "encryption": "none", "security": "tls", "sni": "quiet-meadow-pages-qx.pages.dev",
             "type": "ws", "host": "quiet-meadow-pages-qx.pages.dev", "path": canonical_path,
